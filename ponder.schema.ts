@@ -5,11 +5,13 @@ export default createSchema((p) => ({
   MessageAcceptedV2: p.createTable({
     id: p.string(),
 
+    chainId: p.bigint(),
     blockNumber: p.bigint(),
     blockTimestamp: p.bigint(),
     transactionHash: p.string(),
-
+    transactionIndex: p.int(),
     logIndex: p.int(),
+
     msgHash: p.string(),
     root: p.string(),
     // message struct
@@ -34,9 +36,12 @@ export default createSchema((p) => ({
   MessageDispatchedV2: p.createTable({
     id: p.string(),
 
+    chainId: p.bigint(),
     blockNumber: p.bigint(),
     blockTimestamp: p.bigint(),
     transactionHash: p.string(),
+    transactionIndex: p.int(),
+    logIndex: p.int(),
 
     msgHash: p.string(),
     dispatchResult: p.boolean(),
@@ -44,9 +49,12 @@ export default createSchema((p) => ({
   MessageAssignedV2: p.createTable({
     id: p.string(),
 
+    chainId: p.bigint(),
     blockNumber: p.bigint(),
     blockTimestamp: p.bigint(),
     transactionHash: p.string(),
+    transactionIndex: p.int(),
+    logIndex: p.int(),
 
     msgHash: p.string(),
     oracle: p.hex(),
@@ -57,9 +65,12 @@ export default createSchema((p) => ({
   HashImportedV2: p.createTable({
     id: p.string(),
 
+    chainId: p.bigint(),
     blockNumber: p.bigint(),
     blockTimestamp: p.bigint(),
     transactionHash: p.string(),
+    transactionIndex: p.int(),
+    logIndex: p.int(),
 
     srcChainId: p.bigint(),
     targetChainId: p.bigint(),
@@ -71,11 +82,14 @@ export default createSchema((p) => ({
   SignatureSubmittion: p.createTable({
     id: p.string(),
 
+    chainId: p.bigint(),
     blockNumber: p.bigint(),
     blockTimestamp: p.bigint(),
     transactionHash: p.string(),
+    transactionIndex: p.int(),
+    logIndex: p.int(),
 
-    chainId: p.bigint(),
+    sChainId: p.bigint(),
     channel: p.hex(),
     msgIndex: p.bigint(),
     signer: p.hex(),
