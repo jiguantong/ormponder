@@ -127,10 +127,7 @@ if (process.env['ORMPONDER_ENABLE_SIGNATURE']) {
     const { SignatureSubmittion } = context.db;
     // filter other channels
     if (address.listenSignature.includes(event.args.channel)) {
-      if(event.block.number <= 4958491n && event.block.number >= 4958466n) {
-        return;
-      }
-      if(event.block.number <= 4961928n && event.block.number >= 4965384n) {
+      if(event.block.number <= 5043303n) {
         return;
       }
       await SignatureSubmittion.create({
