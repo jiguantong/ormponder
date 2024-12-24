@@ -130,6 +130,9 @@ if (process.env['ORMPONDER_ENABLE_SIGNATURE']) {
       if(event.block.number <= 4958491n && event.block.number >= 4958466n) {
         return;
       }
+      if(event.block.number <= 4961928n && event.block.number >= 4965384n) {
+        return;
+      }
       await SignatureSubmittion.create({
         id: `${context.network.chainId}-${event.block.number}-${event.log.transactionIndex}-${event.log.logIndex}`,
         data: {
