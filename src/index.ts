@@ -1,5 +1,5 @@
 import { ponder } from "@/generated";
-import * as address from './address.local'
+import * as address from "./address.local";
 
 ponder.on("ORMPV2:MessageAccepted", async ({ event, context }) => {
   const { MessageAcceptedV2 } = context.db;
@@ -122,12 +122,15 @@ ponder.on("ORMPV2:HashImported", async ({ event, context }) => {
   }
 });
 
-if (process.env['ORMPONDER_ENABLE_SIGNATURE']) {
+if (process.env["ORMPONDER_ENABLE_SIGNATURE"]) {
   ponder.on("SignaturePub:SignatureSubmittion", async ({ event, context }) => {
     const { SignatureSubmittion } = context.db;
     // filter other channels
     if (address.listenSignature.includes(event.args.channel)) {
-      if(event.block.number <= 5043303n) {
+      if (event.block.number <= 5043303n) {
+        return;
+      }
+      if (event.args.chainId == 701 || event.args.chainId == 421614) {
         return;
       }
       await SignatureSubmittion.create({
