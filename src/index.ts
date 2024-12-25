@@ -125,14 +125,15 @@ ponder.on("ORMPV2:HashImported", async ({ event, context }) => {
 if (process.env["ORMPONDER_ENABLE_SIGNATURE"]) {
   ponder.on("SignaturePub:SignatureSubmittion", async ({ event, context }) => {
     const { SignatureSubmittion } = context.db;
+    return;
+    if (event.block.number <= 5043303n) {
+      return;
+    }
+    if (event.args.chainId == 701 || event.args.chainId == 421614) {
+      return;
+    }
     // filter other channels
     if (address.listenSignature.includes(event.args.channel)) {
-      if (event.block.number <= 5043303n) {
-        return;
-      }
-      if (event.args.chainId == 701 || event.args.chainId == 421614) {
-        return;
-      }
       await SignatureSubmittion.create({
         id: `${context.network.chainId}-${event.block.number}-${event.log.transactionIndex}-${event.log.logIndex}`,
         data: {
